@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<settings>
+
+    <language id="com.conceitedsoftware.Sugar.apache">
+
+        <name>Apache</name>
+
+        <root-zone>sourcecode.apache</root-zone>
+
+        <detectors>
+            <filename casesensitive="true">htaccess</filename>
+            <filename casesensitive="true">.htaccess</filename>
+            <filename casesensitive="true">apache2.conf</filename>
+            <filename casesensitive="true">httpd.conf</filename>
+            <extension>conf</extension>
+        </detectors>
+
+    </language>
+
+    <meta>
+        <name>Apache</name>
+        <description>A Sugar adding apache config support for Espresso</description>
+        <author>Nicholas Penree</author>
+        <identifier>com.conceitedsoftware.Sugar.apache</identifier>
+        <url>http://github.com/conceited-drudge/apache.sugar</url>
+        <version status="preview">1.0b1</version>
+        <download format="git">git://github.com/conceited-drudge/apache.sugar.git</download>
+    </meta>
+
+</settings>

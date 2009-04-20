@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<syntax name="sourcecode.apache">
+
+    <zones>
+        <include collection="meta"/>
+        <include collection="literal.numeric"/>
+    </zones>
+
+    <library>
+    
+        <collection name="meta">
+        
+             <zone name="metadata.comment.line.hash">
+                <expression>(#).*$\n?</expression>
+                <capture number="1" name="delimiter.seperator.hash.comment.begin" />
+            </zone>
+            
+            <zone name="tag.open">
+                <expression>(&lt;/?)([a-zA-Z]+)</expression>
+                <capture number="1" name="punctuation.definition.begin" />
+                <capture number="2" name="tag.open.name" />
+            </zone>
+            
+            <zone name="identifier.variable">
+                <expression>(%\{)(?:HTTP_(?:USER_AGENT|REFERER|COOKIE|FORWARDED|HOST|PROXY_CONNECTION|ACCEPT)|REMOTE_(?:ADDR|HOST|USER|IDENT)|REQUEST_(?:METHOD|URI|FILENAME)|SCRIPT_FILENAME|PATH_INFO|QUERY_STRING|AUTH_TYPE|DOCUMENT_ROOT|SERVER_(?:ADMIN|NAME|ADDR|PORT|PROTOCOL|SOFTWARE)|TIME_(?:YEAR|MON|DAY|HOUR|MIN|SEC|WDAY)|TIME|API_VERSION|THE_REQUEST|IS_SUBREQ|(?:ENV|LA-U|LA-F|HTTP|SSL):[^\}]+)(\})</expression>
+                <capture number="1" name="identifier.variable.local" />
+                <capture number="3" name="identifier.variable.local" />
+            </zone>
+            
+             <zone name="keyword.constant.std">
+                <expression>\b(R(e(sourceConfig|direct(Match|Temp|Permanent)?|qu(ire|estHeader)|ferer(Ignore|Log)|write(Rule|Map|Base|Cond|Options|Engine|Lo(ck|g(Level)?))|admeName|move(Handler|Charset|Type|InputFilter|OutputFilter|Encoding|Language))|Limit(MEM|NPROC|CPU))|Group|XBitHack|M(MapFile|i(nSpare(Servers|Threads)|meMagicFile)|odMimeUsePathInfo|Cache(RemovalAlgorithm|M(inObjectSize|ax(StreamingBuffer|Object(Size|Count)))|Size)|ultiviewsMatch|eta(Suffix|Dir|Files)|ax(RequestsPer(Child|Thread)|MemFree|Spare(Servers|Threads)|Clients|Threads(PerChild)?|KeepAliveRequests))|B(indAddress|S2000Account|rowserMatch(NoCase)?)|S(hmemUIDisUser|c(oreBoardFile|ript(Sock|InterpreterSource|Log(Buffer|Length)?|Alias(Match)?)?)|tart(Servers|Threads)|S(I(StartTag|TimeFormat|UndefinedEcho|E(ndTag|rrorMsg))|L(R(equire(SSL)?|andomSeed)|Mutex|SessionCache(Timeout)?|C(ipherSuite|ertificate(ChainFile|KeyFile|File)|A(Revocation(Path|File)|Certificate(Path|File)))|Options|P(assPhraseDialog|ro(tocol|xy(MachineCertificate(Path|File)|C(ipherSuite|A(Revocation(Path|File)|Certificate(Path|File)))|Protocol|Engine|Verify(Depth)?)))|Engine|Verify(Client|Depth)))|uexecUserGroup|e(ndBufferSize|cureListen|t(Handler|InputFilter|OutputFilter|Env(If(NoCase)?)?)|rver(Root|Signature|Name|T(ype|okens)|Path|Limit|A(dmin|lias)))|atisfy)|H(ostnameLookups|eader(Name)?)|N(o(Cache|Proxy)|umServers|ameVirtualHost|WSSL(TrustedCerts|Upgradeable))|C(h(ildPerUserID|eckSpelling|arset(SourceEnc|Options|Default))|GI(MapExtension|CommandArgs)|o(ntentDigest|okie(Style|Name|Tracking|Domain|Prefix|Expires|Format|Log)|reDumpDirectory)|ustomLog|learModuleList|ache(Root|Gc(MemUsage|Clean|Interval|Daily|Unused)|M(inFileSize|ax(Expire|FileSize))|Size|NegotiatedDocs|TimeMargin|Ignore(NoLastMod|CacheControl)|D(i(sable|rLe(ngth|vels))|efaultExpire)|E(nable|xpiryCheck)|F(ile|orceCompletion)|LastModifiedFactor))|T(hread(sPerChild|StackSize|Limit)|ypesConfig|ime(out|Out)|ransferLog)|I(n(clude|dex(Ignore|O(ptions|rderDefault)))|SAPI(ReadAheadBuffer|CacheFile|FakeAsync|LogNotSupported|AppendLogTo(Errors|Query))|dentityCheck|f(Module|Define)|map(Menu|Base|Default))|O(ptions|rder)|D(irectory(Match|Slash|Index)?|ocumentRoot|e(ny|f(late(MemLevel|BufferSize|CompressionLevel|FilterNote|WindowSize)|ault(Type|Icon|Language)))|av(MinTimeout|DepthInfinity|LockDB)?)|U(se(CanonicalName|r(Dir)?)|nsetEnv)|P(idFile|ort|assEnv|ro(tocol(ReqCheck|Echo)|xy(Re(ceiveBufferSize|quests|mote(Match)?)|Ma(tch|xForwards)|B(lock|adHeader)|Timeout|IOBufferSize|Domain|P(ass(Reverse)?|reserveHost)|ErrorOverride|Via)?))|E(nable(MMAP|Sendfile|ExceptionHook)|BCDIC(Convert(ByType)?|Kludge)|rror(Header|Document|Log)|x(t(endedStatus|Filter(Options|Define))|pires(ByType|Default|Active)|ample))|Virtual(ScriptAlias(IP)?|Host|DocumentRoot(IP)?)|KeepAlive(Timeout)?|F(ile(s(Match)?|ETag)|or(ce(Type|LanguagePriority)|ensicLog)|ancyIndexing)|Win32DisableAcceptEx|L(i(sten(Back(log|Log))?|mit(Request(Body|Field(s(ize)?|Size)|Line)|XMLRequestBody|InternalRecursion|Except)?)|o(c(kFile|ation(Match)?)|ad(Module|File)|g(Format|Level))|DAP(SharedCache(Size|File)|Cache(TTL|Entries)|TrustedCA(Type)?|OpCache(TTL|Entries))|anguagePriority)|A(ssignUserID|nonymous(_(MustGiveEmail|NoUserID|VerifyEmail|LogEmail|Authoritative))?|c(ce(ss(Config|FileName)|pt(Mutex|PathInfo|Filter))|tion)|dd(Module(Info)?|Handler|Charset|Type|I(nputFilter|con(By(Type|Encoding))?)|OutputFilter(ByType)?|De(scription|faultCharset)|Encoding|Language|Alt(By(Type|Encoding))?)|uth(GroupFile|Name|Type|D(B(GroupFile|M(GroupFile|Type|UserFile|Authoritative)|UserFile|Authoritative)|igest(GroupFile|ShmemSize|N(cCheck|once(Format|Lifetime))|Domain|Qop|File|Algorithm))|UserFile|LDAP(RemoteUserIsDN|GroupAttribute(IsDN)?|Bind(DN|Password)|C(harsetConfig|ompareDNOnServer)|DereferenceAliases|Url|Enabled|FrontPageHack|Authoritative)|Authoritative)|l(ias(Match)?|low(CONNECT|Override|EncodedSlashes)?)|gentLog)|MIMEMagicFile)\b</expression>
+                <capture number="1" name="keyword.constant.std.begin" />
+            </zone>
+ 
+             <zone name="identifier.class">
+                <expression>\b(access_module|actions_module|action_module|alias_module|anon_auth_module|asis_module|authn_anon_module|authn_dbd_module|authn_dbm_module|authn_default_module|authn_file_module|authz_dbm_module|authz_default_module|authz_groupfile_module|authz_host_module|authz_owner_module|authz_user_module|auth_basic_module|auth_digest_module|auth_module|autoindex_module|bonjour_module|cache_module|cern_meta_module|cgi_module|config_log_module|dav_fs_module|dav_module|dbd_module|dbm_auth_module|deflate_module|digest_module|dir_module|disk_cache_module|dumpio_module|env_module|expires_module|ext_filter_module|fastcgi_module|filter_module|foo_module|headers_module|hfs_apple_module|ident_module|imagemap_module|imap_module|includes_module|include_module|info_module|jk_module|logio_module|log_config_module|log_forensic_module|mem_cache_module|mime_magic_module|mime_module|negotiation_module|perl_module|php4_module|php5_module|proxy_ajp_module|proxy_balancer_module|proxy_connect_module|proxy_ftp_module|proxy_http_module|proxy_module|rendezvous_apple_module|rendezvous_module|rewrite_module|setenvif_module|speling_module|ssl_module|status_module|unique_id_module|userdir_module|usertrack_module|version_module|vhost_alias_module)\b</expression>
+                <capture number="1" name="identifier.class.name" />
+            </zone>
+            
+             <zone name="literal.string.quoted.double">
+                <starts-with>
+                    <expression>"</expression>
+                    <capture number="0" name="delimiter.balanced.quote.double.begin"/>
+                </starts-with>
+                <ends-with>
+                    <expression>"</expression>
+                    <capture number="0" name="delimiter.balanced.quote.double.begin"/>
+                </ends-with>
+                <subzones>
+                    <include collection="identifier.variable" />
+                    <zone name="literal.escape.brief">
+                        <!-- 'A single-quoted string with \'escape sequences\'' -->
+                        <expression>(\\)("|\\)</expression>
+                        <capture number="1" name="delimiter.seperator.escape"/>
+                        <capture number="2" name="character"/>
+                    </zone>
+                </subzones>
+            </zone>
+            
+        </collection>
+
+        <collection name="literal.numeric">
+            <!--
+            I want to seperately hilight all the different types of
+            literal.numerics. So, we have to provide multiple similar definitions
+            of a literal.numeric.
+            
+            Grabbed from elliottcable's Ruby.sugar
+            -->
+            <!-- 01756 -->
+            <zone name="literal.numeric.integer.octal">
+                <expression>\b(0)([0-7]+)\b</expression>
+                <capture number="1" name="numeric.delimiter.octal.initial-zero"/>
+                <capture number="2" name="numeric.octal.value"/>
+            </zone>
+            <!-- 0b010010110 -->
+            <zone name="literal.numeric.integer.binary">
+                <expression>\b(0(?:b|B))([01]+)\b</expression>
+                <capture number="1" name="numeric.delimiter.binary.initial-zero-b"/>
+                <capture number="2" name="numeric.binary.value"/>
+            </zone>
+            <!-- 0xDEADBEEF586 -->
+            <zone name="literal.numeric.integer.hex">
+                <expression>\b(0(?:x|X))([0-9a-fA-F]+)\b</expression>
+                <capture number="1" name="numeric.delimiter.hexadecimal.initial-zero-x"/>
+                <capture number="2" name="numeric.hexadecimal.value"/>
+            </zone>
+            <!-- 142.87e3, 0.22e8 -->
+            <zone name="literal.numeric.float.with-exponent">
+                <expression>\b(0|[1-9][0-9]*)(\.)([0-9]+)(e|E)(-?[0-9]+)\b</expression>
+                <capture number="1" name="integral.value"/>
+                <capture number="2" name="delimiter.seperator.radix-point"/>
+                <capture number="3" name="fractional.value"/>
+                <capture number="4" name="literal.numeric.exponent.delimiter"/>
+                <capture number="5" name="literal.numeric.exponent.value"/>
+            </zone>
+            <!-- 142.87, 0.22 -->
+            <zone name="literal.numeric.float">
+                <expression>\b(0|[1-9][0-9]*)(\.)([0-9]+)\b</expression>
+                <capture number="1" name="integral.value"/>
+                <capture number="2" name="delimiter.seperator.radix-point"/>
+                <capture number="3" name="fractional.value"/>
+            </zone>
+            <!-- 142e3, 0e8 -->
+            <zone name="literal.numeric.integer.decimal.with-exponent">
+                <expression>\b(0|[1-9][0-9]*)(e|E)(-?[0-9]+)\b</expression>
+                <capture number="1" name="integral.value"/>
+                <capture number="2" name="literal.numeric.exponent.delimiter"/>
+                <capture number="3" name="literal.numeric.exponent.value"/>
+            </zone>
+            <!-- 142e3, 0e8 -->
+            <zone name="literal.numeric.integer.decimal">
+                <expression>\b(0|[1-9][0-9]*)\b</expression>
+                <capture number="1" name="integral.value"/>
+            </zone>
+        </collection>
+
+    </library>
+    
+</syntax>
