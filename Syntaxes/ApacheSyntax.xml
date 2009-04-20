@@ -16,10 +16,21 @@
                 <capture number="1" name="delimiter.seperator.hash.comment.begin" />
             </zone>
             
-            <zone name="tag.open">
+            <zone name="tag.open.any">
+                <expression>^[ ]*(&lt;)([a-zA-Z0-9:]+)[^&gt;]*(&gt;(&lt;)/)(\2)(&gt;)</expression>
+                <capture number="1" name="punctuation.definition.begin" />
+                <capture number="2" name="name" />
+                <capture number="3" name="punctuation.definition.begin" />
+                <capture number="4" name="text.xml" />
+                <capture number="5" name="name" />
+                <capture number="6" name="punctuation.definition.end" />
+
+            </zone>
+            
+            <zone name="tag.open.xml">
                 <expression>(&lt;/?)([a-zA-Z]+)</expression>
                 <capture number="1" name="punctuation.definition.begin" />
-                <capture number="2" name="tag.open.name" />
+                <capture number="2" name="name" />
             </zone>
             
             <zone name="identifier.variable">
@@ -34,7 +45,7 @@
             </zone>
  
              <zone name="identifier.class">
-                <expression>\b(access_module|actions_module|action_module|alias_module|anon_auth_module|asis_module|authn_anon_module|authn_dbd_module|authn_dbm_module|authn_default_module|authn_file_module|authz_dbm_module|authz_default_module|authz_groupfile_module|authz_host_module|authz_owner_module|authz_user_module|auth_basic_module|auth_digest_module|auth_module|autoindex_module|bonjour_module|cache_module|cern_meta_module|cgi_module|config_log_module|dav_fs_module|dav_module|dbd_module|dbm_auth_module|deflate_module|digest_module|dir_module|disk_cache_module|dumpio_module|env_module|expires_module|ext_filter_module|fastcgi_module|filter_module|foo_module|headers_module|hfs_apple_module|ident_module|imagemap_module|imap_module|includes_module|include_module|info_module|jk_module|logio_module|log_config_module|log_forensic_module|mem_cache_module|mime_magic_module|mime_module|negotiation_module|perl_module|php4_module|php5_module|proxy_ajp_module|proxy_balancer_module|proxy_connect_module|proxy_ftp_module|proxy_http_module|proxy_module|rendezvous_apple_module|rendezvous_module|rewrite_module|setenvif_module|speling_module|ssl_module|status_module|unique_id_module|userdir_module|usertrack_module|version_module|vhost_alias_module)\b</expression>
+                <expression>\b(access_module|actions_module|action_module|alias_module|anon_auth_module|asis_module|authn_anon_module|authn_dbd_module|authn_dbm_module|authn_default_module|authn_file_module|authz_dbm_module|authz_default_module|authz_groupfile_module|authz_host_module|authz_owner_module|authz_user_module|auth_basic_module|auth_digest_module|auth_module|autoindex_module|bonjour_module|cache_module|cern_meta_module|cgi_module|config_log_module|dav_fs_module|dav_module|dbd_module|dbm_auth_module|deflate_module|digest_module|dir_module|disk_cache_module|dumpio_module|env_module|expires_module|ext_filter_module|fastcgi_module|filter_module|foo_module|headers_module|hfs_apple_module|ident_module|imagemap_module|imap_module|includes_module|include_module|info_module|jk_module|logio_module|log_config_module|log_forensic_module|mem_cache_module|mime_magic_module|mime_module|negotiation_module|perl_module|php4_module|php5_module|proxy_ajp_module|proxy_balancer_module|proxy_connect_module|proxy_ftp_module|proxy_http_module|proxy_module|rendezvous_apple_module|rendezvous_module|rewrite_module|setenvif_module|speling_module|ssl_module|status_module|unique_id_module|userdir_module|usertrack_module|version_module|vhost_alias_module|bucketeer_module|cgid_module|case_filter_in_module|case_filter_module|charset_lite_module|echo_module|file_cache_module|auth_dbm_module|auth_anon_module)\b</expression>
                 <capture number="1" name="identifier.class.name" />
             </zone>
             
@@ -56,6 +67,63 @@
                         <capture number="2" name="character"/>
                     </zone>
                 </subzones>
+            </zone>
+            
+            <zone name="container.block.vhost">
+                <starts-with>
+                    <expression>^[ ]*((&lt;)(VirtualHost)(?:[ ]+([^&gt;]+))?(&gt;))</expression>
+                    <capture number="1" name="punctuation.definition.begin"/>
+                    <capture number="2" name="name"/>
+                    <capture number="3" name="name"/>
+                    <capture number="4" name="meta.toc-list.virtual-host.apache-config"/>
+                    <capture number="5" name="punctuation.definition.end"/>
+
+                </starts-with>
+                <ends-with>
+                    <expression>^[ ]*((&lt;/)(VirtualHost)[^&gt;]*(&gt;))</expression>
+                    <capture number="1" name="punctuation.definition.begin"/>
+                    <capture number="2" name="name"/>
+                    <capture number="3" name="name"/>
+                    <capture number="5" name="punctuation.definition.end"/>
+                </ends-with>
+            </zone>
+            
+            <zone name="container.block.directory">
+                <starts-with>
+                    <expression>^[ ]*((&lt;)(Directory(?:Match)?)(?:[ ]+([^&gt;]+))?(&gt;))</expression>
+                    <capture number="1" name="punctuation.definition.begin"/>
+                    <capture number="2" name="name"/>
+                    <capture number="3" name="name"/>
+                    <capture number="4" name="meta.toc-list.directory.apache-config"/>
+                    <capture number="5" name="punctuation.definition.end"/>
+
+                </starts-with>
+                <ends-with>
+                    <expression>^[ ]*((&lt;/)(Directory(?:Match)?)[^&gt;]*(&gt;))</expression>
+                    <capture number="1" name="punctuation.definition.begin"/>
+                    <capture number="2" name="name"/>
+                    <capture number="3" name="name"/>
+                    <capture number="5" name="punctuation.definition.end"/>
+                </ends-with>
+            </zone>
+            
+            <zone name="container.block.location">
+                <starts-with>
+                    <expression>^[ ]*((&lt;)(Location(?:Match)?)(?:[ ]+([^&gt;]+))?(&gt;))</expression>
+                    <capture number="1" name="punctuation.definition.begin"/>
+                    <capture number="2" name="name"/>
+                    <capture number="3" name="name"/>
+                    <capture number="4" name="meta.toc-list.directory.apache-config"/>
+                    <capture number="5" name="punctuation.definition.end"/>
+
+                </starts-with>
+                <ends-with>
+                    <expression>^[ ]*((&lt;/)(Location(?:Match)?)[^&gt;]*(&gt;))</expression>
+                    <capture number="1" name="punctuation.definition.begin"/>
+                    <capture number="2" name="name"/>
+                    <capture number="3" name="name"/>
+                    <capture number="5" name="punctuation.definition.end"/>
+                </ends-with>
             </zone>
             
         </collection>
